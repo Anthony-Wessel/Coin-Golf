@@ -80,6 +80,7 @@ public class CoinController : MonoBehaviour
                 {
                     // Launch the coin
                     rb.AddForce(force, ForceMode.Impulse);
+                    GameManager.AddStroke();
                 }
                 
                 draggingCoin = false;

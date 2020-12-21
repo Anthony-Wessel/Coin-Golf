@@ -28,7 +28,7 @@ public class ExtendableArrow : MonoBehaviour
     public void SetLength(float length)
     {
         // Check that length value is between 0 and 1
-        if (length < 0 || length > 1)
+        if (length < 0 || length > 1.01)
             Debug.LogWarning("ExtendableArrow.SetLength(float length): length value should be between 0 and 1 (inclusive) | length = " + length);  
         length = Mathf.Clamp(length, 0, 1);
 
