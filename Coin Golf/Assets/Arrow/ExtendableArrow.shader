@@ -3,6 +3,7 @@ Shader "Unlit/ExtendableArrow"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
+        _Color ("Color", Color) = (1,1,1,1)
         _Stretch ("Stretch", float) = 1
     }
     SubShader
@@ -34,6 +35,7 @@ Shader "Unlit/ExtendableArrow"
 
             sampler2D _MainTex;
             float _Stretch;
+            fixed4 _Color;
 
             v2f vert (appdata v)
             {
@@ -51,7 +53,7 @@ Shader "Unlit/ExtendableArrow"
                 i.uv.y -= (1 - 1 / _Stretch);
                 i.uv.y *= _Stretch;
 
-                fixed4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv) * _Color;
 
                 return col;
             }
