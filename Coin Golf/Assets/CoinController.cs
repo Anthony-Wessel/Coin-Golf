@@ -66,10 +66,6 @@ public class CoinController : MonoBehaviour
                 dragOrigin = Input.mousePosition;
                 draggingCoin = true;
             }
-            else
-            {
-                // Rotate camera
-            }
         }
         // LMB Up
         else if (Input.GetMouseButtonUp(0))
