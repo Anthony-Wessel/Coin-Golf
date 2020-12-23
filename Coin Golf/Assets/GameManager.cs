@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     public int maxStrokes;
     public int parStrokes;
 
-    GUIManager gui;
+    static GUIManager gui;
 
     static GameManager instance;
     public static GameManager Instance()
@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour
 
     public static void Win()
     {
-        print("You win!");
+        gui.ShowWinPanel();
     }
 
     void initGUI()
@@ -53,5 +53,20 @@ public class GameManager : MonoBehaviour
     void updateScore()
     {
         gui.SetCurrentStrokes(currentStrokes);
+    }
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene("Main Menu");
+    }
+
+    public void ReplayLevel()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void LoadNextLevel()
+    {
+        LevelSet.getSet(SceneManager.GetActiveScene().name).LoadNextScene(SceneManager.GetActiveScene().name);
     }
 }

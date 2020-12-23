@@ -349,6 +349,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3551513946906759553, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551513946906759553, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3551513946906759553, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 147
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119266076350588685, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119266076350588685, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4119266076350588685, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 240
+      objectReference: {fileID: 0}
+    - target: {fileID: 4154735990833032542, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475703924465675407, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475703924465675407, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4475703924465675407, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 54
+      objectReference: {fileID: 0}
     - target: {fileID: 8190430981836291596, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
       propertyPath: m_Name
       value: StandardSceneGroup

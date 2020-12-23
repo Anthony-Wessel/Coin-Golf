@@ -9,6 +9,9 @@ public class GUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI parText;
     [SerializeField] TextMeshProUGUI scoreText;
 
+    [SerializeField] GameObject winPanel;
+    [SerializeField] GameObject losePanel;
+
     int par;
     int maxStrokes;
     int currentStrokes;
@@ -34,5 +37,15 @@ public class GUIManager : MonoBehaviour
     {
         this.currentStrokes = currentStrokes;
         scoreText.text = "Strokes: " + currentStrokes + " / " + maxStrokes;
+    }
+
+    public void ShowWinPanel()
+    {
+        winPanel.SetActive(true);
+    }
+
+    public void ShowLosePanel()
+    {
+        winPanel.SetActive(true);
     }
 }
