@@ -22,7 +22,9 @@ public class LevelSet : ScriptableObject
                 return;
             }
         }
-        
+
+        if (currentSceneName == "Main Menu")
+            SceneManager.LoadScene(scenes[0]);
     }
 
     public bool Contains(string sceneName)
