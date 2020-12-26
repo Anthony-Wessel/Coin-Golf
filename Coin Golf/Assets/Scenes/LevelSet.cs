@@ -42,7 +42,8 @@ public class LevelSet : ScriptableObject
 
     public static LevelSet getSet(string sceneName)
     {
-        LevelSet[] sets = Resources.FindObjectsOfTypeAll<LevelSet>();
+        LevelSet[] sets = Resources.LoadAll<LevelSet>("Level Sets");
+
         for (int i = 0; i < sets.Length; i++)
         {
             if (sets[i].Contains(sceneName))

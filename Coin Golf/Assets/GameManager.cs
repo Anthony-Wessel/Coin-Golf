@@ -67,6 +67,7 @@ public class GameManager : MonoBehaviour
 
     public void LoadNextLevel()
     {
-        LevelSet.getSet(SceneManager.GetActiveScene().name).LoadNextScene(SceneManager.GetActiveScene().name);
+        string activeScene = SceneManager.GetActiveScene().name;
+        LevelSet.getSet(activeScene).LoadNextScene(activeScene);
     }
 }
