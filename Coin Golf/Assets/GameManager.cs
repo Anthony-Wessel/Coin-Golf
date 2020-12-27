@@ -48,6 +48,7 @@ public class GameManager : MonoBehaviour
         gui.SetPar(parStrokes);
         gui.SetMaxStrokes(maxStrokes);
         gui.SetCurrentStrokes(0);
+        gui.UpdateStars(2);
     }
 
     void updateScore()

@@ -12,9 +12,12 @@ public class GUIManager : MonoBehaviour
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
 
+    [SerializeField] Transform starHolder;
+
     int par;
     int maxStrokes;
     int currentStrokes;
+    int activeStars = 0;
 
     public void SetLevelName(string name)
     {
@@ -47,5 +50,22 @@ public class GUIManager : MonoBehaviour
     public void ShowLosePanel()
     {
         winPanel.SetActive(true);
+    }
+
+    public void UpdateStars(int numStars)
+    {
+        numStars = Mathf.Min(numStars, 3);
+        if (numStars > activeStars)
+            StartCoroutine(growStars(numStars));
+    }
+
+    IEnumerator growStars(int numStars)
+    {
+        for (int i = activeStars; i < numStars; i++)
+        {
+            starHolder.GetChild(i).GetComponent<Animator>().SetTrigger("grow");
+            yield return new WaitForSeconds(0.1f);
+        }
+        activeStars = numStars;
     }
 }
