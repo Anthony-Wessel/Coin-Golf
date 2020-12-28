@@ -385,6 +385,18 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1873832034, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_Name
+      value: Best Score Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 2060619354, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_Name
+      value: Best Score
+      objectReference: {fileID: 0}
+    - target: {fileID: 2060619356, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
+      propertyPath: m_text
+      value: 'Best Score: 0'
+      objectReference: {fileID: 0}
     - target: {fileID: 5070901780580944026, guid: cf471bd3210919b498df6c683a3fed0b, type: 3}
       propertyPath: starHolder
       value: 

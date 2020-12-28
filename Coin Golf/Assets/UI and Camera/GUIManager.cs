@@ -8,6 +8,7 @@ public class GUIManager : MonoBehaviour
     [SerializeField] TextMeshProUGUI levelName;
     [SerializeField] TextMeshProUGUI parText;
     [SerializeField] TextMeshProUGUI scoreText;
+    [SerializeField] TextMeshProUGUI bestScoreText;
 
     [SerializeField] GameObject winPanel;
     [SerializeField] GameObject losePanel;
@@ -67,5 +68,10 @@ public class GUIManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         activeStars = numStars;
+    }
+
+    public void SetBestScore(int strokes)
+    {
+        bestScoreText.text = "Best Score: " + strokes;
     }
 }

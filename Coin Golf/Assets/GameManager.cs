@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     int currentStrokes;
     public int maxStrokes;
     public int parStrokes;
+    int stars;
 
     static GUIManager gui;
 
@@ -39,7 +40,21 @@ public class GameManager : MonoBehaviour
 
     public static void Win()
     {
+        Instance().stars = 3;
+        Instance().SaveData();
+        gui.UpdateStars(3);
         gui.ShowWinPanel();
+    }
+
+    void SaveData()
+    {
+        string levelName = SceneManager.GetActiveScene().name;
+
+        int bestScore = PlayerPrefs.GetInt(levelName + "-bestScore", 0);
+        PlayerPrefs.SetInt(levelName + "-bestScore", Mathf.Min(bestScore, currentStrokes));
+
+        int bestStars = PlayerPrefs.GetInt(levelName + "-bestStars", 0);
+        PlayerPrefs.SetInt(levelName + "-bestStars", Mathf.Max(bestStars, stars));
     }
 
     void initGUI()
@@ -48,7 +63,11 @@ public class GameManager : MonoBehaviour
         gui.SetPar(parStrokes);
         gui.SetMaxStrokes(maxStrokes);
         gui.SetCurrentStrokes(0);
-        gui.UpdateStars(2);
+
+        // Load high score data
+        string levelName = SceneManager.GetActiveScene().name;
+        gui.SetBestScore(PlayerPrefs.GetInt(levelName + "-bestScore", 0));
+        gui.UpdateStars(PlayerPrefs.GetInt(levelName + "-bestStars", 0));
     }
 
     void updateScore()
