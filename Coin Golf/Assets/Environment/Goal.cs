@@ -30,7 +30,7 @@ public class Goal : MonoBehaviour
         {
             if (playerRB.velocity.magnitude == 0)
             {
-                GameManager.Win();
+                GameManager.Instance.Win();
                 containsPlayer = false;
             }
                 

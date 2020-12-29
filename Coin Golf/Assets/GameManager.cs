@@ -1,24 +1,28 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    int currentStrokes;
-    public int maxStrokes;
-    public int parStrokes;
-    int stars;
+    public int currentStrokes { get; private set; }
 
-    static GUIManager gui;
+    GUIManager gui;
 
     static GameManager instance;
-    public static GameManager Instance()
+
+    bool ended = false;
+
+    public LevelData levelData;
+    public static GameManager Instance
     {
-        if (instance == null)
-            instance = FindObjectOfType<GameManager>();
-        
-        return instance; 
+        get
+        {
+            if (instance == null)
+                instance = FindObjectOfType<GameManager>();
+
+            return instance;
+        }
     }
 
     private void Awake()
@@ -27,47 +31,53 @@ public class GameManager : MonoBehaviour
         initGUI();
     }
 
-    public static void AddStroke()
+    public void AddStroke()
     {
-        Instance().currentStrokes++;
-        Instance().updateScore();
+        currentStrokes++;
+        updateScore();
     }
 
-    public static void Lose()
+    public bool OutOfStrokes()
     {
+        return currentStrokes >= levelData.par * 2;
+    }
+
+    public void Lose()
+    {
+        if (ended) return;
+
         print("You lost!");
+        ended = true;
     }
 
-    public static void Win()
+    public void Win()
     {
-        Instance().stars = 3;
-        Instance().SaveData();
-        gui.UpdateStars(3);
+        if (ended) return;
+
+        SaveData();
+
+        gui.SetBestScore(Mathf.Min(currentStrokes, levelData.bestScore));
+        gui.UpdateStars(calculateStars(currentStrokes, levelData.par));
         gui.ShowWinPanel();
+
+        ended = true;
     }
 
     void SaveData()
     {
-        string levelName = SceneManager.GetActiveScene().name;
-
-        int bestScore = PlayerPrefs.GetInt(levelName + "-bestScore", 0);
-        PlayerPrefs.SetInt(levelName + "-bestScore", Mathf.Min(bestScore, currentStrokes));
-
-        int bestStars = PlayerPrefs.GetInt(levelName + "-bestStars", 0);
-        PlayerPrefs.SetInt(levelName + "-bestStars", Mathf.Max(bestStars, stars));
+        levelData.bestScore = Mathf.Min(levelData.bestScore, currentStrokes);
     }
 
     void initGUI()
     {
         gui.SetLevelName(SceneManager.GetActiveScene().name);
-        gui.SetPar(parStrokes);
-        gui.SetMaxStrokes(maxStrokes);
+        gui.SetPar(levelData.par);
+        gui.SetMaxStrokes(levelData.par*2);
         gui.SetCurrentStrokes(0);
 
         // Load high score data
-        string levelName = SceneManager.GetActiveScene().name;
-        gui.SetBestScore(PlayerPrefs.GetInt(levelName + "-bestScore", 0));
-        gui.UpdateStars(PlayerPrefs.GetInt(levelName + "-bestStars", 0));
+        gui.SetBestScore(levelData.bestScore);
+        gui.UpdateStars(calculateStars(levelData.bestScore, levelData.par));
     }
 
     void updateScore()
@@ -89,5 +99,25 @@ public class GameManager : MonoBehaviour
     {
         string activeScene = SceneManager.GetActiveScene().name;
         LevelSet.getSet(activeScene).LoadNextScene(activeScene);
+    }
+
+    int calculateStars(int score, int par)
+    {
+        int stars;
+        if (score <= par)
+            stars = 3;
+        else if (score <= par * 1.5f)
+            stars = 2;
+        else if (score <= par * 2)
+            stars = 1;
+        else
+            stars = 0;
+
+        return stars;
+    }
+
+    public void WipeBestScore()
+    {
+        levelData.bestScore = 100;
     }
 }

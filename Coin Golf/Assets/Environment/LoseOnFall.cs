@@ -7,6 +7,6 @@ public class LoseOnFall : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag.Equals("Player"))
-            GameManager.Lose();
+            GameManager.Instance.Lose();
     }
 }

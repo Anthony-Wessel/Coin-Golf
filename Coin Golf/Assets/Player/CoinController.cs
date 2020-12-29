@@ -14,6 +14,7 @@ public class CoinController : MonoBehaviour
 
     Rigidbody rb;
     ExtendableArrow arrow;
+    bool maybeLost = false;
 
     Vector3 force;
 
@@ -27,6 +28,22 @@ public class CoinController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // Don't let the player do anything if the ran out of strokes
+        if (GameManager.Instance.OutOfStrokes())
+        {
+            arrow.gameObject.SetActive(false);
+            if (!isMoving())
+            {
+                if (maybeLost)
+                    GameManager.Instance.Lose();
+                else
+                    maybeLost = true;
+            }
+
+            return;
+        }
+        maybeLost = false;
+
         // Player is dragging to launch the coin
         if (draggingCoin)
         {
@@ -76,7 +93,7 @@ public class CoinController : MonoBehaviour
                 {
                     // Launch the coin
                     rb.AddForce(force, ForceMode.Impulse);
-                    GameManager.AddStroke();
+                    GameManager.Instance.AddStroke();
                 }
                 
                 draggingCoin = false;
