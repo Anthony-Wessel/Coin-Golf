@@ -5,7 +5,8 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     bool containsPlayer;
-    Rigidbody playerRB;
+    CoinController player;
+    bool lastStroke = false;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -22,18 +23,34 @@ public class Goal : MonoBehaviour
     private void Start()
     {
         containsPlayer = false;
-        playerRB = GameObject.FindGameObjectWithTag("Player").GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<CoinController>();
     }
     private void Update()
     {
-        if (containsPlayer)
+        if (!player.IsMoving())
         {
-            if (playerRB.velocity.magnitude == 0)
+            if (containsPlayer)
             {
                 GameManager.Instance.Win();
                 containsPlayer = false;
             }
-                
+            else
+            {
+                if (lastStroke)
+                {
+                    GameManager.Instance.Lose();
+                }
+                else if (GameManager.Instance.OutOfStrokes())
+                {
+                    StartCoroutine(setLastStroke());
+                }
+            } 
         }
+    }
+
+    IEnumerator setLastStroke()
+    {
+        yield return new WaitForSeconds(0.1f);
+        lastStroke = true;
     }
 }

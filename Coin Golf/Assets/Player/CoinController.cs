@@ -14,7 +14,6 @@ public class CoinController : MonoBehaviour
 
     Rigidbody rb;
     ExtendableArrow arrow;
-    bool maybeLost = false;
 
     Vector3 force;
 
@@ -30,19 +29,7 @@ public class CoinController : MonoBehaviour
     {
         // Don't let the player do anything if the ran out of strokes
         if (GameManager.Instance.OutOfStrokes())
-        {
-            arrow.gameObject.SetActive(false);
-            if (!isMoving())
-            {
-                if (maybeLost)
-                    GameManager.Instance.Lose();
-                else
-                    maybeLost = true;
-            }
-
             return;
-        }
-        maybeLost = false;
 
         // Player is dragging to launch the coin
         if (draggingCoin)
@@ -77,7 +64,7 @@ public class CoinController : MonoBehaviour
         // LMB Down
         if (Input.GetMouseButtonDown(0))
         {
-            if (!isMoving() && RaycastCoin())
+            if (!IsMoving() && RaycastCoin())
             {
                 // Grab the current mouse position as the origin
                 dragOrigin = Input.mousePosition;
@@ -102,7 +89,7 @@ public class CoinController : MonoBehaviour
     }
 
     // Returns true if coin is moving, false if it is still
-    bool isMoving()
+    public bool IsMoving()
     {
         return rb.velocity.magnitude != 0;
     }

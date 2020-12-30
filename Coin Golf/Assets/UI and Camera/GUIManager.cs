@@ -50,7 +50,7 @@ public class GUIManager : MonoBehaviour
 
     public void ShowLosePanel()
     {
-        winPanel.SetActive(true);
+        losePanel.SetActive(true);
     }
 
     public void UpdateStars(int numStars)
@@ -72,6 +72,6 @@ public class GUIManager : MonoBehaviour
 
     public void SetBestScore(int strokes)
     {
-        bestScoreText.text = "Best Score: " + strokes;
+        bestScoreText.text = "Best Score: " + (strokes==1000 ? "-" : strokes.ToString());
     }
 }

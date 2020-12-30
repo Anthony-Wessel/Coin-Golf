@@ -46,7 +46,7 @@ public class GameManager : MonoBehaviour
     {
         if (ended) return;
 
-        print("You lost!");
+        gui.ShowLosePanel();
         ended = true;
     }
 

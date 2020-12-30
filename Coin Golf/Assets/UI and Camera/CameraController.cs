@@ -38,6 +38,8 @@ public class CameraController : MonoBehaviour
     private void LateUpdate()
     {
         // Chase player
-        transform.position = Vector3.Lerp(transform.position, player.position, 4*Time.deltaTime);
+        if (transform.position.y > -3)
+            transform.position = Vector3.Lerp(transform.position, player.position, 4*Time.deltaTime);
+        
     }
 }
