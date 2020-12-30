@@ -53,6 +53,7 @@ public class GUIManager : MonoBehaviour
         losePanel.SetActive(true);
     }
 
+    // Update the number of stars earned
     public void UpdateStars(int numStars)
     {
         numStars = Mathf.Min(numStars, 3);
@@ -60,6 +61,7 @@ public class GUIManager : MonoBehaviour
             StartCoroutine(growStars(numStars));
     }
 
+    // Tell the new stars to appear in order with a slight delay
     IEnumerator growStars(int numStars)
     {
         for (int i = activeStars; i < numStars; i++)
