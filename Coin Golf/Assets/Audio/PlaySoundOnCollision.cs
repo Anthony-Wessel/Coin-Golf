@@ -15,7 +15,6 @@ public class PlaySoundOnCollision : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         float force = collision.impulse.magnitude / Time.fixedDeltaTime;
-        print(force);
         src.PlayOneShot(sound, (force+250)/750);
     }
 }
