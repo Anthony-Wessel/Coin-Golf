@@ -66,6 +66,7 @@ public class GameManager : MonoBehaviour
     void SaveData()
     {
         levelData.bestScore = Mathf.Min(levelData.bestScore, currentStrokes);
+        levelData.SaveData();
     }
 
     void initGUI()
@@ -76,6 +77,7 @@ public class GameManager : MonoBehaviour
         gui.SetCurrentStrokes(0);
 
         // Load high score data
+        levelData.LoadData();
         gui.SetBestScore(levelData.bestScore);
         gui.UpdateStars(calculateStars(levelData.bestScore, levelData.par));
     }
